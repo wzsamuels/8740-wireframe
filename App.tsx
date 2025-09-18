@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { Page, type Product, type CartItem } from './types';
 import { PRODUCTS } from './constants';
@@ -83,14 +82,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen font-sans text-gray-700 bg-white">
+    <div className="flex flex-col min-h-screen font-inter text-plum bg-white">
       <Header 
         cartItemCount={cart.reduce((sum, item) => sum + item.quantity, 0)} 
         onNavigateHome={() => navigateTo(Page.Home)}
         onNavigateCart={() => navigateTo(Page.Cart)}
         onSearch={handleSearch}
       />
-      <main className="flex-grow container mx-auto px-4 py-8">
+      <main className="flex-grow container mx-auto px-4 py-8 md:py-12">
         {renderPage()}
       </main>
       <Footer />

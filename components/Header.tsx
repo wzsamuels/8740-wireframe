@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import Logo from './Logo';
 
 interface HeaderProps {
   cartItemCount: number;
@@ -30,10 +30,10 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount, onNavigateHome, onNaviga
     };
     
   return (
-    <header className="bg-gray-50 border-b-2 border-dashed border-gray-300 sticky top-0 z-10">
+    <header className="bg-gray-50 border-b border-gray-200 sticky top-0 z-10">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="text-2xl font-bold text-gray-600 cursor-pointer" onClick={onNavigateHome}>
-          USELESS GADGETS
+        <div className="cursor-pointer" onClick={onNavigateHome}>
+          <Logo className="h-8 w-auto"/>
         </div>
         
         <div className="flex-1 max-w-md mx-4">
@@ -43,18 +43,18 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount, onNavigateHome, onNaviga
                     placeholder="Search for uselessness..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-4 py-2 bg-white border-2 border-dashed border-gray-300 text-gray-700 focus:outline-none focus:border-gray-500"
+                    className="w-full pl-4 pr-10 py-2 bg-white border border-gray-300 text-plum rounded-md focus:outline-none focus:ring-2 focus:ring-lavender focus:border-lavender transition"
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-plum transition">
                     <SearchIcon className="h-5 w-5" />
                 </button>
             </form>
         </div>
 
-        <div className="relative cursor-pointer" onClick={onNavigateCart}>
-          <CartIcon className="h-8 w-8 text-gray-600"/>
+        <div className="relative cursor-pointer group" onClick={onNavigateCart}>
+          <CartIcon className="h-8 w-8 text-plum group-hover:text-terracotta transition"/>
           {cartItemCount > 0 && (
-            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center border-2 border-gray-50">
+            <span className="absolute -top-1 -right-2 bg-terracotta text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-gray-50">
               {cartItemCount}
             </span>
           )}

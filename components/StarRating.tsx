@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface StarRatingProps {
@@ -8,7 +7,7 @@ interface StarRatingProps {
 
 const StarIcon: React.FC<{ filled: boolean }> = ({ filled }) => (
   <svg
-    className={`w-5 h-5 ${filled ? 'text-yellow-400' : 'text-gray-300'}`}
+    className={`w-5 h-5 ${filled ? 'text-lavender' : 'text-gray-300'}`}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
