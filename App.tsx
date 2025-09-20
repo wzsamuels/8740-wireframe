@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Page, type Product, type CartItem } from './types';
 import { PRODUCTS } from './src/constants';
 import Header from './src/components/Header';
@@ -9,12 +9,57 @@ import CartPage from './src/components/CartPage';
 import CheckoutPage from './src/components/CheckoutPage';
 import SearchResultsPage from './src/components/SearchResultsPage';
 
+interface ToastProps {
+  message: string;
+  onClose: () => void;
+}
+
+const Toast: React.FC<ToastProps> = ({ message, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div className="toast bg-plum text-white py-2 px-4 rounded-md shadow-lg flex items-center justify-between">
+      <span>{message}</span>
+      <button onClick={onClose} className="ml-4 text-white opacity-70 hover:opacity-100">&times;</button>
+    </div>
+  );
+};
+
+interface ToastContainerProps {
+  toasts: { id: number; message: string }[];
+  removeToast: (id: number) => void;
+}
+
+const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, removeToast }) => (
+  <div className="toast-container" role="status" aria-live="polite">
+    {toasts.map(toast => (
+      <Toast key={toast.id} message={toast.message} onClose={() => removeToast(toast.id)} />
+    ))}
+  </div>
+);
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Home);
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [toasts, setToasts] = useState<{ id: number; message: string }[]>([]);
+
+  const addToast = useCallback((message: string) => {
+    const id = Date.now();
+    setToasts(prevToasts => [...prevToasts, { id, message }]);
+  }, []);
+
+  const removeToast = useCallback((id: number) => {
+    setToasts(prevToasts => prevToasts.filter(toast => toast.id !== id));
+  }, []);
 
   const navigateTo = useCallback((page: Page) => {
     setCurrentPage(page);
@@ -36,12 +81,17 @@ const App: React.FC = () => {
       }
       return [...prevCart, { ...productToAdd, quantity: 1 }];
     });
-  }, []);
+    addToast(`${productToAdd.name} added to cart!`);
+  }, [addToast]);
   
   const updateCartQuantity = useCallback((productId: number, newQuantity: number) => {
       setCart(prevCart => {
           if (newQuantity <= 0) {
-              return prevCart.filter(item => item.id !== productId);
+              // Mark for removal to trigger animation
+              setTimeout(() => {
+                  setCart(currentCart => currentCart.filter(item => item.id !== productId));
+              }, 500); // CSS animation duration
+              return prevCart.map(item => item.id === productId ? {...item, status: 'removing'} : item);
           }
           return prevCart.map(item => item.id === productId ? {...item, quantity: newQuantity} : item);
       })
@@ -83,6 +133,7 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen font-inter text-plum bg-white">
+      <ToastContainer toasts={toasts} removeToast={removeToast} />
       <Header 
         cartItemCount={cart.reduce((sum, item) => sum + item.quantity, 0)} 
         onNavigateHome={() => navigateTo(Page.Home)}

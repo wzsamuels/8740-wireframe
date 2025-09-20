@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Product, Review } from '../types';
+import type { Product, Review } from '../../types';
 import StarRating from './StarRating';
 import ProductImage from './ProductImage';
 

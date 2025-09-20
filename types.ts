@@ -1,4 +1,3 @@
-
 export interface Review {
   id: number;
   author: string;
@@ -18,6 +17,7 @@ export interface Product {
 
 export interface CartItem extends Product {
   quantity: number;
+  status?: 'removing';
 }
 
 export enum Page {

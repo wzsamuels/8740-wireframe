@@ -1,5 +1,5 @@
 import React from 'react';
-import type { CartItem } from '../types';
+import type { CartItem } from '../../types';
 import ProductImage from './ProductImage';
 
 interface CartPageProps {
@@ -37,9 +37,9 @@ const CartPage: React.FC<CartPageProps> = ({ cartItems, onUpdateQuantity, onChec
                             <p className="text-gray-500">${item.price.toFixed(2)}</p>
                         </div>
                         <div className="flex items-center space-x-3 mx-4">
-                            <button onClick={() => onUpdateQuantity(item.id, item.quantity - 1)} className="px-2 py-1 border border-gray-300 rounded-md w-8 h-8 flex items-center justify-center hover:bg-gray-100">-</button>
-                            <span className="font-bold w-4 text-center">{item.quantity}</span>
-                            <button onClick={() => onUpdateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 border border-gray-300 rounded-md w-8 h-8 flex items-center justify-center hover:bg-gray-100">+</button>
+                            <button aria-label={`Decrease quantity of ${item.name}`} onClick={() => onUpdateQuantity(item.id, item.quantity - 1)} className="px-2 py-1 border border-gray-300 rounded-md w-8 h-8 flex items-center justify-center hover:bg-gray-100">-</button>
+                            <span className="font-bold w-4 text-center" aria-live="polite">{item.quantity}</span>
+                            <button aria-label={`Increase quantity of ${item.name}`} onClick={() => onUpdateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 border border-gray-300 rounded-md w-8 h-8 flex items-center justify-center hover:bg-gray-100">+</button>
                         </div>
                         <p className="font-semibold text-plum w-24 text-right">${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
