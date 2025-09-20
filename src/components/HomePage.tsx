@@ -37,7 +37,7 @@ const HomePage: React.FC<HomePageProps> = ({ products, onViewProduct }) => {
           >
             <div className="w-full h-80 bg-gray-200 rounded-md overflow-hidden">
                <div className="w-full h-full group-hover:scale-105 transition-transform duration-300 ease-in-out">
-                <ProductImage productName={featuredProduct.name} productDescription={featuredProduct.longDescription} />
+                <ProductImage productImage={featuredProduct.image} productName={featuredProduct.name} productDescription={featuredProduct.longDescription} />
               </div>
             </div>
             <div>
