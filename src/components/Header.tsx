@@ -21,7 +21,23 @@ const CartIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 
-const Header: React.FC<HeaderProps> = ({ cartItemCount, onNavigateHome, onNavigateCart, onSearch }) => {
+
+interface DemoButtonProps {
+  onDemo: () => void;
+}
+
+const DemoButton: React.FC<DemoButtonProps> = ({ onDemo }) => (
+  <button
+    onClick={onDemo}
+    className="ml-4 px-4 py-2 bg-lavender text-white font-bold rounded-md shadow hover:bg-terracotta transition-all"
+    aria-label="Run demo user flow"
+    type="button"
+  >
+    Demo
+  </button>
+);
+
+const Header: React.FC<HeaderProps & { onDemo: () => void }> = ({ cartItemCount, onNavigateHome, onNavigateCart, onSearch, onDemo }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearchSubmit = (e: React.FormEvent) => {
@@ -50,6 +66,8 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount, onNavigateHome, onNaviga
                 </button>
             </form>
         </div>
+
+        <DemoButton onDemo={onDemo} />
 
         <div className="relative cursor-pointer group" onClick={onNavigateCart}>
           <CartIcon className="h-8 w-8 text-plum group-hover:text-terracotta transition"/>

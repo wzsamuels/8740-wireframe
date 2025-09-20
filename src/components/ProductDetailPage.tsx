@@ -23,7 +23,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onAddToC
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div className="w-full h-96 bg-gray-200 rounded-lg overflow-hidden border border-gray-200">
-          <ProductImage productName={product.name} productDescription={product.longDescription} />
+          <ProductImage productImage={product.image} productName={product.name} productDescription={product.longDescription} />
         </div>
         <div>
           <h1 className="text-4xl font-extrabold text-plum mb-2">{product.name}</h1>

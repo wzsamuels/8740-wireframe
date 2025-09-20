@@ -30,7 +30,7 @@ const CartPage: React.FC<CartPageProps> = ({ cartItems, onUpdateQuantity, onChec
                 {cartItems.map(item => (
                     <div key={item.id} className="flex items-center p-4 border border-gray-200 rounded-lg">
                         <div className="w-24 h-24 bg-gray-200 rounded-md overflow-hidden flex-shrink-0 mr-4">
-                           <ProductImage productName={item.name} productDescription={item.description} />
+                           <ProductImage productImage={item.image} productName={item.name} productDescription={item.description} />
                         </div>
                         <div className="flex-grow">
                             <h2 className="text-lg font-bold text-plum">{item.name}</h2>

@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { generateAndCacheImage } from '../imageGenerator';
-import { Product } from '@/types';
 
 interface ProductImageProps {
   productName: string;
