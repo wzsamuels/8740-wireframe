@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { Page, type Product, type CartItem } from './types';
-import { PRODUCTS } from './constants';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './components/HomePage';
-import ProductDetailPage from './components/ProductDetailPage';
-import CartPage from './components/CartPage';
-import CheckoutPage from './components/CheckoutPage';
-import SearchResultsPage from './components/SearchResultsPage';
+import { PRODUCTS } from './src/constants';
+import Header from './src/components/Header';
+import Footer from './src/components/Footer';
+import HomePage from './src/components/HomePage';
+import ProductDetailPage from './src/components/ProductDetailPage';
+import CartPage from './src/components/CartPage';
+import CheckoutPage from './src/components/CheckoutPage';
+import SearchResultsPage from './src/components/SearchResultsPage';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Home);

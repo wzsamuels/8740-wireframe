@@ -12,6 +12,7 @@ export interface Product {
   price: number;
   description: string;
   longDescription: string;
+  image?: string;
   reviews: Review[];
 }
 

@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { generateAndCacheImage } from '../imageGenerator';
+import { Product } from '@/types';
 
 interface ProductImageProps {
   productName: string;
   productDescription: string;
+  productImage?: string;
   className?: string;
 }
 
-const ProductImage: React.FC<ProductImageProps> = ({ productName, productDescription, className = '' }) => {
+const ProductImage: React.FC<ProductImageProps> = ({ productName, productDescription, productImage,  className = '' }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,6 +43,13 @@ const ProductImage: React.FC<ProductImageProps> = ({ productName, productDescrip
     if (isIntersecting) {
       setIsLoading(true);
       setError(null);
+
+      if (productImage) {
+        setImageUrl(productImage);
+        setIsLoading(false);
+        return;
+      }
+
       const cacheKey = `product-image-${productName}`;
       const prompt = `A minimalist, professional product shot of a "${productName}", which is a ${productDescription}. The product is centered on a soft light gray background (#f3f4f6), with clean, bright studio lighting. High-fidelity, 4k, photorealistic.`;
 

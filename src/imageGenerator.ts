@@ -62,7 +62,7 @@ export const generateAndCacheImage = (
         return;
       }
       
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+      const ai = new GoogleGenAI({ apiKey: "AIzaSyCFpN-_oHBaEIOid-VTxpFZ-2iETS87HvA" });
       const response = await ai.models.generateImages({
         model: 'imagen-4.0-generate-001',
         prompt: prompt,

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Product } from '../types';
+import type { Product } from '../../types';
 import ProductCard from './ProductCard';
 import ProductImage from './ProductImage';
 import BannerImage from './BannerImage';
